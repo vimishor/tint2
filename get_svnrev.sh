@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FALLBACK=\"0.11-svn\"
+FALLBACK=\"0.11.1\"
 
 if [ $# -eq 0 ]; then
   DIR=.
