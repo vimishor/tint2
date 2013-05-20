@@ -1,3 +1,5 @@
+NOTE: This is a fork slightly changed for my needs. 
+Original svn repository can be found on https://code.google.com/p/tint2/
 ---------------------------------------------------------
 execute "tint2"
 or "tint2  -c  path_to_config_file"
