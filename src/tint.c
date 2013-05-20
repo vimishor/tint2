@@ -378,6 +378,13 @@ int tint2_handles_click(Panel* panel, XButtonEvent* e)
 		else
 			return 0;
 	}
+	if (click_battery(panel, e->x, e->y)) {
+		if ( (e->button == 1 && battery_lclick_command) || (e->button == 3 && battery_rclick_command) )
+			return 1;
+		else
+			return 0;
+	}
+
 	return 0;
 }
 
@@ -507,6 +514,14 @@ void event_button_release (XEvent *e)
 
 	if ( click_clock(panel, e->xbutton.x, e->xbutton.y)) {
 		clock_action(e->xbutton.button);
+		if (panel_layer == BOTTOM_LAYER)
+			XLowerWindow (server.dsp, panel->main_win);
+		task_drag = 0;
+		return;
+	}
+
+	if ( click_battery(panel, e->xbutton.x, e->xbutton.y)) {
+		battery_action(e->xbutton.button);
 		if (panel_layer == BOTTOM_LAYER)
 			XLowerWindow (server.dsp, panel->main_win);
 		task_drag = 0;

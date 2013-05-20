@@ -152,6 +152,7 @@ Launcher *click_launcher (Panel *panel, int x, int y);
 LauncherIcon *click_launcher_icon (Panel *panel, int x, int y);
 int click_padding(Panel *panel, int x, int y);
 int click_clock(Panel *panel, int x, int y);
+int click_battery(Panel *panel, int x, int y);
 Area* click_area(Panel *panel, int x, int y);
 
 void autohide_show(void* p);

@@ -689,6 +689,18 @@ int click_clock(Panel *panel, int x, int y)
 	return FALSE;
 }
 
+int click_battery(Panel *panel, int x, int y)
+{
+	Battery bat = panel->battery;
+	if (panel_horizontal) {
+		if (bat.area.on_screen && x >= bat.area.posx && x <= (bat.area.posx + bat.area.width))
+			return TRUE;
+	} else {
+		if (bat.area.on_screen && y >= bat.area.posy && y <= (bat.area.posy + bat.area.height))
+			return TRUE;
+	}
+	return FALSE;
+}
 
 Area* click_area(Panel *panel, int x, int y)
 {

@@ -56,6 +56,8 @@ static char buf_bat_time[20];
 int8_t battery_low_status;
 unsigned char battery_low_cmd_send;
 char *battery_low_cmd;
+char *battery_lclick_command;
+char *battery_rclick_command;
 char *path_energy_now;
 char *path_energy_full;
 char *path_current_now;
@@ -112,6 +114,8 @@ void default_battery()
 	battery_state.percentage = 0;
 	battery_state.time.hours = 0;
 	battery_state.time.minutes = 0;
+	battery_lclick_command = 0;
+	battery_rclick_command = 0;
 #if defined(__OpenBSD__) || defined(__NetBSD__)
 	apm_fd = -1;
 #endif
@@ -127,6 +131,8 @@ void cleanup_battery()
 	if (path_status) g_free(path_status);
 	if (battery_low_cmd) g_free(battery_low_cmd);
 	if (battery_timeout) stop_timeout(battery_timeout);
+	if (battery_lclick_command) g_free(battery_lclick_command);
+	if (battery_rclick_command) g_free(battery_rclick_command);
 
 #if defined(__OpenBSD__) || defined(__NetBSD__)
 	if ((apm_fd != -1) && (close(apm_fd) == -1))
@@ -480,3 +486,16 @@ int resize_battery(void *obj)
 	return ret;
 }
 
+void battery_action(int button)
+{
+	char *command = 0;
+	switch (button) {
+		case 1:
+		command = battery_lclick_command;
+		break;
+		case 3:
+		command = battery_rclick_command;
+		break;
+	}
+	tint_exec(command);
+}
