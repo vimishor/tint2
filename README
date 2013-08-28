@@ -4,6 +4,16 @@ Original svn repository can be found on https://code.google.com/p/tint2/
 execute "tint2"
 or "tint2  -c  path_to_config_file"
 
+Custom changes:
+
+  - [x] added left & right click support for battery panel
+```
+  // left click: minimise all windows
+  battery_lclick_command = xdotool key --delay 300 super+d
+
+  // right click: open power statistics  
+  battery_lclick_command = gnome-power-statistics
+```
 
 check http://code.google.com/p/tint2/
 for latest release, documentation and sample config file.
